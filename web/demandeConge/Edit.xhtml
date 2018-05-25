@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeCongeEditDlg" widgetVar="DemandeCongeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDemandeCongeTitle}">
+            <h:form id="DemandeCongeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeCongeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_entiteToValidate}" for="entiteToValidate" />
+                        <p:selectOneMenu id="entiteToValidate" value="#{demandeCongeController.selected.entiteToValidate}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}"
+                                           var="entiteToValidateItem"
+                                           itemValue="#{entiteToValidateItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_duree}" for="duree" />
+                        <p:inputText id="duree" value="#{demandeCongeController.selected.duree}" title="#{bundle.EditDemandeCongeTitle_duree}" />
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{demandeCongeController.selected.etat}" title="#{bundle.EditDemandeCongeTitle_etat}" />
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_dateEtat}" for="dateEtat" />
+                        <p:calendar id="dateEtat" pattern="MM/dd/yyyy" value="#{demandeCongeController.selected.dateEtat}" title="#{bundle.EditDemandeCongeTitle_dateEtat}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_employee}" for="employee" />
+                        <p:selectOneMenu id="employee" value="#{demandeCongeController.selected.employee}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{employeeController.itemsAvailableSelectOne}"
+                                           var="employeeItem"
+                                           itemValue="#{employeeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_dateDebut}" for="dateDebut" />
+                        <p:calendar id="dateDebut" pattern="MM/dd/yyyy" value="#{demandeCongeController.selected.dateDebut}" title="#{bundle.EditDemandeCongeTitle_dateDebut}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_dateFin}" for="dateFin" />
+                        <p:calendar id="dateFin" pattern="MM/dd/yyyy" value="#{demandeCongeController.selected.dateFin}" title="#{bundle.EditDemandeCongeTitle_dateFin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_typeConge}" for="typeConge" />
+                        <p:selectOneMenu id="typeConge" value="#{demandeCongeController.selected.typeConge}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{typeCongeController.itemsAvailableSelectOne}"
+                                           var="typeCongeItem"
+                                           itemValue="#{typeCongeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeCongeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeCongeController.selected.id}" title="#{bundle.EditDemandeCongeTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandeCongeController.update}" value="#{bundle.Save}" update="display,:DemandeCongeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandeCongeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandeCongeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+ <p:dialog id="DemandeCongeCreateDlg" widgetVar="DemandeCongeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDemandeCongeTitle}">
+            <h:form id="DemandeCongeCreateForm">
+                       <p:tabMenu activeIndex="#{param.i}">
+               
+                <p:menuitem value="Show All Demandeconge Items" outcome="/demandeConge/List"  icon="ui-icon-star">
+        <f:param name="i" value="6" />
+    </p:menuitem>
+    <p:menuitem value="HistoriqueConge" outcome="/demandeConge/HistoriqueConge">
+        <f:param name="i" value="1" />
+    </p:menuitem>
+    <p:menuitem value="My New demands" outcome="/demandeConge/NvDemande" >
+        <f:param name="i" value="2" />
+    </p:menuitem>
+    <p:menuitem value="Show charts" outcome="/demandeConge/StatistiquesBar" >
+        <f:param name="i" value="3" />
+    </p:menuitem>
+    <p:menuitem value="Create Demande" outcome="/demandeConge/Create" >
+        <f:param name="i" value="4" />
+    </p:menuitem>
+    <p:menuitem value="List Entite" outcome="/entiteAdministrative/List" >
+        <f:param name="i" value="4" />
+    </p:menuitem>
+    
+</p:tabMenu>
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeCongeController.selected != null}">
+                        
+                        <p:outputLabel value="#{bundle.CreateDemandeCongeLabel_employee}" for="employee" />
+                        <p:selectOneMenu id="employee" value="#{demandeCongeController.selected.employee}"  >
+                            <p:ajax   process="dateDebut,typeConge" listener="#{demandeCongeController.simuler()}" update="duree,dateFin" />
+                            <f:selectItems value="#{employeeController.itemsAvailableSelectOne}"
+                                           var="employeeItem"
+                                           itemValue="#{employeeItem}" itemLabel="#{employeeItem.nom} #{employeeItem.prenom}"/>
+                           
+                        </p:selectOneMenu>
+                       
+                        <p:outputLabel value="#{bundle.CreateDemandeCongeLabel_dateDebut}" for="dateDebut" />
+                        <p:calendar id="dateDebut" pattern="MM/dd/yyyy" value="#{demandeCongeController.selected.dateDebut}" title="#{bundle.EditDemandeCongeTitle_dateDebut}"  showOn="button">
+                        <p:ajax  event="dateSelect" process="dateDebut,typeConge" listener="#{demandeCongeController.simuler()}" update="duree,dateFin" />
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.CreateDemandeCongeLabel_typeConge}" for="typeConge" />
+                        <p:selectOneMenu id="typeConge" value="#{demandeCongeController.selected.typeConge}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"/> 
+                            <p:ajax process="typeConge" listener="#{demandeCongeController.simuler()}" update=":DemandeCongeCreateForm"/>
+                            <f:selectItems value="#{typeCongeController.itemsAvailableSelectOne}"
+                                           var="typeCongeItem"
+                                           itemValue="#{typeCongeItem}" itemLabel="#{typeCongeItem.nom}"/> 
+                        </p:selectOneMenu> 
+                       
+                        <p:outputLabel value="#{bundle.CreateDemandeCongeLabel_dateFin}" for="dateFin" />
+                        <p:calendar id="dateFin" pattern="MM/dd/yyyy" value="#{demandeCongeController.selected.dateFin}" title="#{bundle.EditDemandeCongeTitle_dateFin}"  showOn="button">
+                        <p:ajax  event="dateSelect" process="dateDebut,typeConge" listener="#{demandeCongeController.simuler()}" update="duree,:growl" />
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.CreateDemandeCongeLabel_duree}" for="duree" />
+                        <p:inputText id="duree" value="#{demandeCongeController.selected.duree}" title="#{bundle.CreateDemandeCongeTitle_duree}" />
+
+                        <p:outputLabel value="#{bundle.CreateDemandeCongeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeCongeController.selected.id}" title="#{bundle.CreateDemandeCongeTitle_id}">
+                            <p:ajax event="blur" update=":DemandeCongeCreateForm" listener="#{demandeCongeController.simuler()}"/></p:inputText>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandeCongeController.create}" value="#{bundle.Save}" update="display,:DemandeCongeListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandeCongeCreateDialog');">
+                        <p:ajax event="click" listener="#{demandeCongeController.simuler()}"/></p:commandButton>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandeCongeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+
+    </ui:composition>
+</html>

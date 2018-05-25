@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EntiteAdministrativeCreateDlg" widgetVar="EntiteAdministrativeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEntiteAdministrativeTitle}">
+            <h:form id="EntiteAdministrativeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{entiteAdministrativeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEntiteAdministrativeLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{entiteAdministrativeController.selected.nom}" title="#{bundle.CreateEntiteAdministrativeTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateEntiteAdministrativeLabel_chef}" for="chef" />
+                        <p:selectOneMenu id="chef" value="#{entiteAdministrativeController.selected.chef}" >
+                            <f:selectItems value="#{employeeController.itemsAvailableSelectOne}"
+                                           var="chefItem"
+                                           itemValue="#{chefItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEntiteAdministrativeLabel_entiteSuperieur}" for="entiteSuperieur" />
+                        <p:selectOneMenu id="entiteSuperieur" value="#{entiteAdministrativeController.selected.entiteSuperieur}" >
+                            <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}"
+                                           var="entiteSuperieurItem"
+                                           itemValue="#{entiteSuperieurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEntiteAdministrativeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{entiteAdministrativeController.selected.id}" title="#{bundle.CreateEntiteAdministrativeTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{entiteAdministrativeController.create}" value="#{bundle.Save}" update="display,:EntiteAdministrativeListForm:datalist,:growl" oncomplete="handleSubmit(args,'EntiteAdministrativeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EntiteAdministrativeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

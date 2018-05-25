@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeCongeViewDlg" widgetVar="DemandeCongeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDemandeCongeTitle}">
+            <h:form id="DemandeCongeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeCongeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_entiteToValidate}"/>
+                        <h:outputText value="#{demandeCongeController.selected.entiteToValidate}" title="#{bundle.ViewDemandeCongeTitle_entiteToValidate}"/>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_duree}"/>
+                        <h:outputText value="#{demandeCongeController.selected.duree}" title="#{bundle.ViewDemandeCongeTitle_duree}"/>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_etat}"/>
+                        <h:outputText value="#{demandeCongeController.selected.etat}" title="#{bundle.ViewDemandeCongeTitle_etat}"/>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_dateEtat}"/>
+                        <h:outputText value="#{demandeCongeController.selected.dateEtat}" title="#{bundle.ViewDemandeCongeTitle_dateEtat}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_employee}"/>
+                        <h:outputText value="#{demandeCongeController.selected.employee}" title="#{bundle.ViewDemandeCongeTitle_employee}"/>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_dateDebut}"/>
+                        <h:outputText value="#{demandeCongeController.selected.dateDebut}" title="#{bundle.ViewDemandeCongeTitle_dateDebut}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_dateFin}"/>
+                        <h:outputText value="#{demandeCongeController.selected.dateFin}" title="#{bundle.ViewDemandeCongeTitle_dateFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_typeConge}"/>
+                        <h:outputText value="#{demandeCongeController.selected.typeConge}" title="#{bundle.ViewDemandeCongeTitle_typeConge}"/>
+                        <h:outputText value="#{bundle.ViewDemandeCongeLabel_id}"/>
+                        <h:outputText value="#{demandeCongeController.selected.id}" title="#{bundle.ViewDemandeCongeTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DemandeCongeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

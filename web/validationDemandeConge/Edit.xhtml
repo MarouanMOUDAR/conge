@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ValidationDemandeCongeEditDlg" widgetVar="ValidationDemandeCongeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditValidationDemandeCongeTitle}">
+            <h:form id="ValidationDemandeCongeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{validationDemandeCongeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditValidationDemandeCongeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{validationDemandeCongeController.selected.id}" title="#{bundle.EditValidationDemandeCongeTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditValidationDemandeCongeLabel_dateValidation}" for="dateValidation" />
+                        <p:calendar id="dateValidation" pattern="MM/dd/yyyy" value="#{validationDemandeCongeController.selected.dateValidation}" title="#{bundle.EditValidationDemandeCongeTitle_dateValidation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditValidationDemandeCongeLabel_demandeConge}" for="demandeConge" />
+                        <p:selectOneMenu id="demandeConge" value="#{validationDemandeCongeController.selected.demandeConge}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{demandeCongeController.itemsAvailableSelectOne}"
+                                           var="demandeCongeItem"
+                                           itemValue="#{demandeCongeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditValidationDemandeCongeLabel_entiteAdministrative}" for="entiteAdministrative" />
+                        <p:selectOneMenu id="entiteAdministrative" value="#{validationDemandeCongeController.selected.entiteAdministrative}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}"
+                                           var="entiteAdministrativeItem"
+                                           itemValue="#{entiteAdministrativeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditValidationDemandeCongeLabel_employeeChef}" for="employeeChef" />
+                        <p:selectOneMenu id="employeeChef" value="#{validationDemandeCongeController.selected.employeeChef}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{employeeController.itemsAvailableSelectOne}"
+                                           var="employeeChefItem"
+                                           itemValue="#{employeeChefItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{validationDemandeCongeController.update}" value="#{bundle.Save}" update="display,:ValidationDemandeCongeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ValidationDemandeCongeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ValidationDemandeCongeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

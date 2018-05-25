@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConfigurationCongeDetailEditDlg" widgetVar="ConfigurationCongeDetailEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConfigurationCongeDetailTitle}">
+            <h:form id="ConfigurationCongeDetailEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{configurationCongeDetailController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConfigurationCongeDetailLabel_typeConge}" for="typeConge" />
+                        <p:selectOneMenu id="typeConge" value="#{configurationCongeDetailController.selected.typeConge}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{typeCongeController.itemsAvailableSelectOne}"
+                                           var="typeCongeItem"
+                                           itemValue="#{typeCongeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConfigurationCongeDetailLabel_nbJour}" for="nbJour" />
+                        <p:inputText id="nbJour" value="#{configurationCongeDetailController.selected.nbJour}" title="#{bundle.EditConfigurationCongeDetailTitle_nbJour}" />
+                        <p:outputLabel value="#{bundle.EditConfigurationCongeDetailLabel_configurationConge}" for="configurationConge" />
+                        <p:selectOneMenu id="configurationConge" value="#{configurationCongeDetailController.selected.configurationConge}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{configurationCongeController.itemsAvailableSelectOne}"
+                                           var="configurationCongeItem"
+                                           itemValue="#{configurationCongeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConfigurationCongeDetailLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{configurationCongeDetailController.selected.id}" title="#{bundle.EditConfigurationCongeDetailTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{configurationCongeDetailController.update}" value="#{bundle.Save}" update="display,:ConfigurationCongeDetailListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConfigurationCongeDetailEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConfigurationCongeDetailEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

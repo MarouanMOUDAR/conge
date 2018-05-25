@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="03596044-303d-459a-a0bd-8bbaad82c360">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="213"/>
+	<property name="ireport.y" value="399"/>
+	<parameter name="dateSystem" class="java.util.Date"/>
+	<parameter name="respo" class="java.lang.String"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nom" class="java.lang.String"/>
+	<field name="dateFerier" class="java.util.Date"/>
+	<field name=" NbrJourFerier" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="184" splitType="Stretch">
+			<textField>
+				<reportElement x="158" y="97" width="199" height="34" uuid="326e4b5c-c055-425d-a500-d62a5ed7fbf0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[la liste des jours ferie]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="357" y="15" width="31" height="26" uuid="e2ec5ebb-a504-41a5-bcb5-7fb4a8e470f5"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[le :]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="422" y="21" width="100" height="20" uuid="6c6225e2-4631-4bed-82bb-7f9d7bd4d148"/>
+				<textFieldExpression><![CDATA[new simpleDateFormat("yyyy-MM-dd").format($P{dateSystem})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="22" y="14" width="120" height="21" uuid="adb39166-a295-4920-bb82-1ac1c4beb5f8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[numero du jour]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="14" width="120" height="21" uuid="5d6fda39-0578-4372-b98c-7821028c83ad"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[date du jour ferie]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="14" width="126" height="21" uuid="957326ea-65db-4f42-9db7-00b6e59c302a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[nom du jour ferie]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="14" width="134" height="21" uuid="898c5f6e-63c8-4a72-b4e3-ef59c2c3244a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[nbr de jour de repos]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="127" splitType="Stretch">
+			<textField>
+				<reportElement x="142" y="-1" width="126" height="35" uuid="1ded1cb4-6d35-42b7-8ff1-6ee86eae7174"/>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="22" y="-1" width="120" height="35" uuid="156def5d-2594-499a-b6f7-4164a295c121"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="-1" width="120" height="35" uuid="697bf51b-8dd6-4f7f-b39b-248c499b6de6"/>
+				<textFieldExpression><![CDATA[new simpleDateFormat("yyyy-MM-dd").format($F{dateFerier})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="-1" width="134" height="35" uuid="1d4db936-0c40-4c2f-9583-a26fcc25d568"/>
+				<textFieldExpression><![CDATA[$F{ NbrJourFerier}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="422" y="87" width="100" height="40" uuid="2a682474-c134-4138-b690-bcb548c02bb5"/>
+				<textFieldExpression><![CDATA[$P{respo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="268" y="87" width="120" height="40" uuid="d54f0610-ee56-4d28-a306-abe1c9d8cf1f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[signature du responsable :]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

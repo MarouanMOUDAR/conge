@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ValidationDemandeCongeViewDlg" widgetVar="ValidationDemandeCongeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewValidationDemandeCongeTitle}">
+            <h:form id="ValidationDemandeCongeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{validationDemandeCongeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewValidationDemandeCongeLabel_id}"/>
+                        <h:outputText value="#{validationDemandeCongeController.selected.id}" title="#{bundle.ViewValidationDemandeCongeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewValidationDemandeCongeLabel_dateValidation}"/>
+                        <h:outputText value="#{validationDemandeCongeController.selected.dateValidation}" title="#{bundle.ViewValidationDemandeCongeTitle_dateValidation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewValidationDemandeCongeLabel_demandeConge}"/>
+                        <h:outputText value="#{validationDemandeCongeController.selected.demandeConge}" title="#{bundle.ViewValidationDemandeCongeTitle_demandeConge}"/>
+                        <h:outputText value="#{bundle.ViewValidationDemandeCongeLabel_entiteAdministrative}"/>
+                        <h:outputText value="#{validationDemandeCongeController.selected.entiteAdministrative}" title="#{bundle.ViewValidationDemandeCongeTitle_entiteAdministrative}"/>
+                        <h:outputText value="#{bundle.ViewValidationDemandeCongeLabel_employeeChef}"/>
+                        <h:outputText value="#{validationDemandeCongeController.selected.employeeChef}" title="#{bundle.ViewValidationDemandeCongeTitle_employeeChef}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ValidationDemandeCongeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
